@@ -2,8 +2,8 @@ new Vue({
   el: '#app',
   data: {
     loading: false,
-    nextItem: 1,
-    items: []
+    limit: 10,
+    posts: []
   },
   mounted () {
 
@@ -20,21 +20,29 @@ new Vue({
 
   },
   methods: {
-    loadMore () {
-      
-      /** This is only for this demo, you could 
-        * replace the following with code to hit 
-        * an endpoint to pull in more data.
-      **/
-      this.loading = true;
-      setTimeout(e => {
-        for (var i = 0; i < 10; i++) {
-          this.items.push('Item ' + this.nextItem++);
-        }
-        this.loading = false;
-      }, 200);
-      /**************************************/
-      
+    loadMore() {
+      console.log("Adding 10 more data results");
+      this.loading = true;  
+      setTimeout(() => {
+        axios.get("https://jsonplaceholder.typicode.com/posts")
+        .then(response => {
+          console.log(JSON.stringify(response.data));
+          const append = response.data.slice(
+            this.posts.length,
+            this.posts.length + this.limit,
+            );
+            this.posts = this.posts.concat(append);
+            // console.log(JSON.stringify( this.posts));
+            this.loading = false;
+
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);       
+          // reject(error);
+          reject(new Error(error)); 
+        });
+      }, 2000);
     }
   }
 });

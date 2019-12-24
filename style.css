@@ -23,6 +23,12 @@ body {
   font-size: 4rem;
   color: #fff;
 }
+.card {
+  border: 1px solid;
+  margin: 9px;
+  padding: 8px;
+  border-radius: 8%;
+}
 .heading h4 {
   color: #a990cc;
   text-align: center;
@@ -55,7 +61,7 @@ body {
   position: absolute;
   color: #fff;
   z-index: 9;
-  background: #5c4084;
+  background: #84ff574a;
   padding: 8px 18px;
   border-radius: 5px;
   left: calc(50% - 45px);
